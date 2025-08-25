@@ -8,8 +8,13 @@ import Ex5 from './components/Ex5.vue';
 import Ex6 from './components/Ex6.vue';
 import Ex7 from './components/Ex7.vue';
 import Ex8 from './components/Ex8.vue';
+import Ex9 from './components/Ex9.vue';
+import Ex10 from './components/Ex10.vue';
+import Ex11 from './components/Ex11.vue';
+import Ex12 from './components/Ex12.vue';
 
-const pages = { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8 };
+const pages = { Ex1, Ex2, Ex3, Ex4, Ex5,
+   Ex6, Ex7, Ex8, Ex9, Ex10, Ex11, Ex12 };
 const activeComp = ref('Ex1');
 </script>
 
@@ -18,60 +23,137 @@ const activeComp = ref('Ex1');
     <!-- 미니멀 툴바 -->
     <div class="toolbar" role="tablist" aria-label="과제 전환">
       <button
-        class="btn"
-        :class="{ active: activeComp==='Ex1' }"
-        @click="activeComp='Ex1'"
-        role="tab" aria-selected="activeComp==='Ex1'"
-      >📎bind_바인드</button>
+  class="btn"
+  :class="{ active: activeComp==='Ex1' }"
+  @click="activeComp='Ex1'"
+  role="tab"
+  :aria-selected="activeComp==='Ex1'"
+>
+  <span class="icon">📎</span>
+  bind_바인드
+</button>
 
-      <button
-        class="btn"
-        :class="{ active: activeComp==='Ex2' }"
-        @click="activeComp='Ex2'"
-        role="tab" aria-selected="activeComp==='Ex2'"
-      >❓if_이프</button>
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex2' }"
+  @click="activeComp='Ex2'"
+  role="tab"
+  :aria-selected="activeComp==='Ex2'"
+>
+  <span class="icon">❓</span>
+  if_이프
+</button>
 
-      <button
-        class="btn"
-        :class="{ active: activeComp==='Ex3' }"
-        @click="activeComp='Ex3'"
-        role="tab" aria-selected="activeComp==='Ex3'"
-      >👁️‍🗨️show_쇼우</button>
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex3' }"
+  @click="activeComp='Ex3'"
+  role="tab"
+  :aria-selected="activeComp==='Ex3'"
+>
+  <span class="icon">👁️‍🗨️</span>
+  show_쇼우
+</button>
 
-      <button
-        class="btn"
-        :class="{ active: activeComp==='Ex4' }"
-        @click="activeComp='Ex4'"
-        role="tab" aria-selected="activeComp==='Ex4'"
-      >🔃for_포</button>
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex4' }"
+  @click="activeComp='Ex4'"
+  role="tab"
+  :aria-selected="activeComp==='Ex4'"
+>
+  <span class="icon">🔃</span>
+  for_포
+</button>
 
-      <button
-        class="btn"
-        :class="{ active: activeComp==='Ex5' }"
-        @click="activeComp='Ex5'"
-        role="tab" aria-selected="activeComp==='Ex5'"
-      >🖇️양방향_bind</button>
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex5' }"
+  @click="activeComp='Ex5'"
+  role="tab"
+  :aria-selected="activeComp==='Ex5'"
+>
+  <span class="icon">🖇️</span>
+  양방향_bind
+</button>
 
-      <button
-        class="btn"
-        :class="{ active: activeComp==='Ex6' }"
-        @click="activeComp='Ex6'"
-        role="tab" aria-selected="activeComp==='Ex6'"
-      >🧩v-if_조건부렌더링</button>
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex6' }"
+  @click="activeComp='Ex6'"
+  role="tab"
+  :aria-selected="activeComp==='Ex6'"
+>
+  <span class="icon">🧩</span>
+  v-if_조건부렌더링
+</button>
 
-      <button
-        class="btn"
-        :class="{ active: activeComp==='Ex7' }"
-        @click="activeComp='Ex7'"
-        role="tab" aria-selected="activeComp==='Ex7'"
-      >📋v-for_반복 렌더링</button>
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex7' }"
+  @click="activeComp='Ex7'"
+  role="tab"
+  :aria-selected="activeComp==='Ex7'"
+>
+  <span class="icon">📋</span>
+  v-for_반복 렌더링
+</button>
 
-      <button
-        class="btn"
-        :class="{ active: activeComp==='Ex8' }"
-        @click="activeComp='Ex8'"
-        role="tab" aria-selected="activeComp==='Ex8'"
-      >⏱️watch 값을 감시</button>
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex8' }"
+  @click="activeComp='Ex8'"
+  role="tab"
+  :aria-selected="activeComp==='Ex8'"
+>
+  <span class="icon">⏱️</span>
+  watch 값을 감시
+</button>
+
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex9' }"
+  @click="activeComp='Ex9'"
+  role="tab"
+  :aria-selected="activeComp==='Ex9'"
+>
+  <span class="icon">🖥️</span>
+  computed 계산된 속성
+</button>
+
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex10' }"
+  @click="activeComp='Ex10'"
+  role="tab"
+  :aria-selected="activeComp==='Ex10'"
+>
+  <span class="icon">🖱️</span>
+  이벤트 핸들링
+</button>
+
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex11' }"
+  @click="activeComp='Ex11'"
+  role="tab"
+  :aria-selected="activeComp==='Ex11'"
+>
+  <span class="icon">🎨</span>
+  class & style 바인딩
+</button>
+
+
+<button
+  class="btn"
+  :class="{ active: activeComp==='Ex12' }"
+  @click="activeComp='Ex12'"
+  role="tab"
+  :aria-selected="activeComp==='Ex12'"
+>
+  <span class="icon">⚡</span>
+  watchEffect 자동 반응
+</button>
     </div>
 
     <!-- 콘텐츠 카드: 은은한 페이드/슬라이드 -->
@@ -111,7 +193,7 @@ const activeComp = ref('Ex1');
   display: flex; 
   align-items: center;
   justify-content: center;
-  gap: 20px;                      /* 이모지-텍스트 간격 */
+  gap: 4px;                      /* 이모지-텍스트 간격 */
   
   min-height: 56px;              /* 높이 통일 (원하면 60~64로 증가) */
   padding: 12px 16px;
@@ -170,6 +252,11 @@ const activeComp = ref('Ex1');
   opacity: 0;
   transform: translateY(-4px);
   filter: blur(.5px);
+}
+
+.icon {
+  font-size: 24px;
+  line-height: 1;
 }
 
 /* 사용자 환경설정: 모션 최소화 시 전환 제거 */
