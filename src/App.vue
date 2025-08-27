@@ -16,27 +16,29 @@ import Ex13 from './components/Ex13.vue'
 import Ex15 from './components/Ex15.vue'
 import Ex16 from './components/Ex16.vue'
 import Ex14 from './components/Ex14.vue'
+import Ex17 from './components/Ex17.vue'
+import Ex18 from './components/Ex18.vue'
+import Ex19 from './components/Ex19.vue'
+import Ex20 from './components/Ex20.vue'
 
-/* 페이지 세트 */
 const pages1 = { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9, Ex10, Ex11, Ex12 }
-const pages2 = { Ex13, Ex14, Ex15, Ex16 } // 26일: 새 과제들만
+const pages2 = { Ex13, Ex14, Ex15, Ex16 }
+const pages3 = { Ex17, Ex18, Ex19, Ex20 }
 
-/* 단계 & 선택 상태 */
 const step = ref('day')
 const selectedDay = ref(null)   // 날짜 객체 자체를 저장
 const activeComp = ref('Ex1')   // 실제 선택은 openDay에서 보정됨
 
-/* 날짜 목록 */
 const days = ref([
   { id: '2025-08-25', label: '08월 25일', pages: pages1 },
   { id: '2025-08-26', label: '08월 26일', pages: pages2 },
+  { id: '2025-08-27', label: '08월 27일', pages: pages3 },
 ])
 
 /* 계산 값 */
 const currentDay = computed(() => selectedDay.value)
 const currentPages = computed(() => (currentDay.value ? currentDay.value.pages : null))
 
-/* ───────────────── 메뉴 메타 & 동적 가시 메뉴 ───────────────── */
 const allMenus = [
   { key: 'Ex1',  label: 'bind_바인드',          icon: '📎' },
   { key: 'Ex2',  label: 'if_이프',              icon: '❓' },
@@ -54,6 +56,10 @@ const allMenus = [
   { key: 'Ex14', label: 'v-model 간단폼',       icon: '📝' },
   { key: 'Ex15', label: '로컬 목록 필터',       icon: '🔍' },
   { key: 'Ex16', label: '탭 전환',              icon: '🗂️' },
+  { key: 'Ex17', label: '키보드, 마우스 이벤트', icon: '🎊' },
+  { key: 'Ex18', label: '',              icon: '' },
+  { key: 'Ex19', label: '',              icon: '' },
+  { key: 'Ex20', label: '',              icon: '' },
 ]
 
 // pages 객체의 첫 키를 얻어 초기 선택에 사용
@@ -142,10 +148,8 @@ watch([currentPages, activeComp], ([pages, key]) => {
         </button>
       </div>
 
-      <!-- 콘텐츠 카드 -->
       <Transition name="fade-slide" mode="out-in">
         <div id="comp_view" class="card" :key="activeComp" role="region" aria-live="polite">
-          <!-- 존재할 때만 KeepAlive 자체를 렌더 -->
           <template v-if="canRenderActive">
             <KeepAlive>
               <component :is="currentPages[activeComp]" />
@@ -153,7 +157,9 @@ watch([currentPages, activeComp], ([pages, key]) => {
           </template>
           <template v-else>
             <div class="desc">
-              선택한 컴포넌트를 불러올 수 없어요. (선택 날짜의 pages에 키가 없거나 비어 있음)
+              선택한 날짜의 과제를 불러올 수 없습니다.
+              <br>
+              ==과제 작성 X / 페이지 연결 X==
             </div>
           </template>
         </div>
