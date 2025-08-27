@@ -3,7 +3,7 @@
   <div class="wrap">
 
     <section class="card">
-      <h3>1. Enter로 추가 · Esc로 초기화</h3>
+      <h3>1. 입력창 Enter로 추가 · Esc로 초기화</h3>
       <p>할 일을 입력하고 <b>Enter</b>를 누르면 목록에 추가됩니다. <b>Esc</b>로 입력창 초기화.</p>
       <input
         type="text"
@@ -24,7 +24,7 @@
         <label>수량
           <input type="number" min="1" v-model.number="qty" />
         </label>
-        <label>단가(₩)
+        <label>단가(원)
           <input type="number" min="0" step="10" v-model.lazy="price" />
         </label>
       </div>
@@ -32,7 +32,7 @@
     </section>
 
     <section class="card">
-      <h3>3. 휠로 크기 조절 (@wheel.prevent)</h3>
+      <h3>3. 휠로 크기 조절</h3>
       <p>박스 위에서 마우스 휠을 굴리면 크기가 0.5~2.0 사이에서 변합니다.</p>
       <div
         class="box"
