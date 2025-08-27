@@ -1,9 +1,9 @@
 <!-- src/components/Ex18.vue -->
 <template>
   <div class="wrap">
-    <!-- 1) Enter로 추가 / Esc로 초기화 -->
+
     <section class="card">
-      <h3>1) Enter로 추가 · Esc로 초기화</h3>
+      <h3>1. Enter로 추가 · Esc로 초기화</h3>
       <p>할 일을 입력하고 <b>Enter</b>를 누르면 목록에 추가됩니다. <b>Esc</b>로 입력창 초기화.</p>
       <input
         type="text"
@@ -17,9 +17,8 @@
       </ol>
     </section>
 
-    <!-- 2) v-model 수식어(.number / .lazy) -->
     <section class="card">
-      <h3>2) v-model 수식어: .number · .lazy</h3>
+      <h3>2. v-model 수식어: .number · .lazy</h3>
       <p>수량은 <code>.number</code>로 숫자 변환, 가격은 <code>.lazy</code>로 <em>focus 해제 시</em> 반영.</p>
       <div class="row">
         <label>수량
@@ -32,9 +31,8 @@
       <p>합계: <b>{{ formattedTotal }}</b> (qty: {{ typeof qty }}, price: {{ typeof price }})</p>
     </section>
 
-    <!-- 3) 마우스 휠로 박스 크기 조절 -->
     <section class="card">
-      <h3>3) 휠로 크기 조절 (@wheel.prevent)</h3>
+      <h3>3. 휠로 크기 조절 (@wheel.prevent)</h3>
       <p>박스 위에서 마우스 휠을 굴리면 크기가 0.5~2.0 사이에서 변합니다.</p>
       <div
         class="box"
@@ -45,9 +43,8 @@
       </div>
     </section>
 
-    <!-- 4) 드래그&드롭: 파일 목록 + 이미지 미리보기 -->
     <section class="card">
-      <h3>4) Drag & Drop 파일</h3>
+      <h3>4. Drag & Drop 파일</h3>
       <p>아래 영역에 파일을 드롭하세요. 이미지면 미리보기가 표시됩니다.</p>
       <div
         class="dropzone"
