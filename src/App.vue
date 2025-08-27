@@ -21,6 +21,7 @@ import Ex18 from './components/Ex18.vue'
 import Ex19 from './components/Ex19.vue'
 import Ex20 from './components/Ex20.vue'
 
+
 const pages1 = { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9, Ex10, Ex11, Ex12 }
 const pages2 = { Ex13, Ex14, Ex15, Ex16 }
 const pages3 = { Ex17, Ex18, Ex19, Ex20 }
@@ -57,9 +58,7 @@ const allMenus = [
   { key: 'Ex15', label: '로컬 목록 필터',       icon: '🔍' },
   { key: 'Ex16', label: '탭 전환',              icon: '🗂️' },
   { key: 'Ex17', label: '키보드, 마우스 이벤트', icon: '🎊' },
-  { key: 'Ex18', label: '',              icon: '' },
-  { key: 'Ex19', label: '',              icon: '' },
-  { key: 'Ex20', label: '',              icon: '' },
+  { key: 'Ex18', label: '폼/파일/휠 데모',       icon: '🖱️' },
 ]
 
 // pages 객체의 첫 키를 얻어 초기 선택에 사용
