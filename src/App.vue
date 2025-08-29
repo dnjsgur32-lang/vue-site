@@ -1,105 +1,141 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
-import Ex1 from './components/Ex1.vue'
-import Ex2 from './components/Ex2.vue'
-import Ex3 from './components/Ex3.vue'
-import Ex4 from './components/Ex4.vue'
-import Ex5 from './components/Ex5.vue'
-import Ex6 from './components/Ex6.vue'
-import Ex7 from './components/Ex7.vue'
-import Ex8 from './components/Ex8.vue'
-import Ex9 from './components/Ex9.vue'
-import Ex10 from './components/Ex10.vue'
-import Ex11 from './components/Ex11.vue'
-import Ex12 from './components/Ex12.vue'
-import Ex13 from './components/Ex13.vue'
-import Ex15 from './components/Ex15.vue'
-import Ex16 from './components/Ex16.vue'
-import Ex14 from './components/Ex14.vue'
-import Ex17 from './components/Ex17.vue'
-import Ex18 from './components/Ex18.vue'
-import Ex19 from './components/Ex19.vue'
-import Ex20 from './components/Ex20.vue'
 
+/* ===========================
+   1) 자동 임포트
+   - prep/Ex*.vue (준비과제)
+  
+   =========================== */
+const globPrep = import.meta.glob('@/components/prep/Ex*.vue', { eager: true })
+const globAll1 = import.meta.glob('@/components/**/*.vue', { eager: true })
+const globAll2 = import.meta.glob('@/pages/*.vue', { eager: true })
 
-const pages1 = { Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9, Ex10, Ex11, Ex12 }
-const pages2 = { Ex13, Ex14, Ex15, Ex16 }
-const pages3 = { Ex17, Ex18, Ex19, Ex20 }
+/* 파일 경로 → 파일명 키로 맵핑 (Ex1, HomeView 등) */
+const toMap = (mods) =>
+  Object.fromEntries(
+    Object.entries(mods).map(([p, m]) => {
+      const name = p.split('/').pop().replace('.vue', '')
+      return [name, m.default]
+    }),
+  )
 
-const step = ref('day')
-const selectedDay = ref(null)   // 날짜 객체 자체를 저장
-const activeComp = ref('Ex1')   // 실제 선택은 openDay에서 보정됨
+const Prep = toMap(globPrep)                  // Ex1 ~ Ex20
+const Any  = toMap({ ...globAll1, ...globAll2 }) // 모든 컴포넌트/페이지
 
-const days = ref([
-  { id: '2025-08-25', label: '08월 25일', pages: pages1 },
-  { id: '2025-08-26', label: '08월 26일', pages: pages2 },
-  { id: '2025-08-27', label: '08월 27일', pages: pages3 },
+/* 특정 키만 뽑는 유틸 */
+const pick = (obj, keys) =>
+  keys.reduce((acc, k) => (obj[k] ? ((acc[k] = obj[k]), acc) : acc), {})
+
+/* ===========================
+   2) 날짜별 묶음
+   =========================== */
+const pages1 = pick(Prep, [
+  'Ex1','Ex2','Ex3','Ex4','Ex5','Ex6',
+  'Ex7','Ex8','Ex9','Ex10','Ex11','Ex12',
+])
+const pages2 = pick(Prep, ['Ex13','Ex14','Ex15','Ex16'])
+const pages3 = pick(Prep, ['Ex17','Ex18','Ex19','Ex20'])
+
+/* 08/28~29: 페이지/도구 등을 메뉴로 노출
+   - 파일이 없어도 pick이 자동으로 건너뜀 */
+const pages4 = pick(Any, [
+  // 라우터 페이지
+  'HomeView','AboutView','StudyView',
+  'Ex_WebDesign','Ex_A1','Ex_B2',
+
+  // 있으면 노출되는 도구/소개 컴포넌트들
+  'HomeIntro','AboutIntro','QuickMemo','RouterHelper',
 ])
 
-/* 계산 값 */
-const currentDay = computed(() => selectedDay.value)
-const currentPages = computed(() => (currentDay.value ? currentDay.value.pages : null))
+/* ===========================
+   3) 상태/계산값/동작
+   =========================== */
+const step        = ref('day')
+const selectedDay = ref(null)
+const activeComp  = ref(null)
 
+const days = ref([
+  { id: '2025-08-25',   label: '08월 25일',   pages: pages1 },
+  { id: '2025-08-26',   label: '08월 26일',   pages: pages2 },
+  { id: '2025-08-27',   label: '08월 27일',   pages: pages3 },
+  { id: '2025-08-28~29',label: '08월 28~29일',pages: pages4 },
+])
+
+const currentDay   = computed(() => selectedDay.value)
+const currentPages = computed(() =>
+  currentDay.value ? currentDay.value.pages : null,
+)
+
+/* 메뉴 정의(보여줄 순서/라벨). 존재하는 키만 필터링됨 */
 const allMenus = [
-  { key: 'Ex1',  label: 'bind_바인드',          icon: '📎' },
-  { key: 'Ex2',  label: 'if_이프',              icon: '❓' },
-  { key: 'Ex3',  label: 'show_쇼우',            icon: '👁️‍🗨️' },
-  { key: 'Ex4',  label: 'for_포',               icon: '🔃' },
-  { key: 'Ex5',  label: '양방향_bind',          icon: '🖇️' },
-  { key: 'Ex6',  label: 'v-if_조건부렌더링',    icon: '🧩' },
-  { key: 'Ex7',  label: 'v-for_반복 렌더링',    icon: '📋' },
-  { key: 'Ex8',  label: 'watch 값을 감시',      icon: '⏱️' },
-  { key: 'Ex9',  label: 'computed 계산된 속성', icon: '🖥️' },
-  { key: 'Ex10', label: '이벤트 핸들링',        icon: '🖱️' },
-  { key: 'Ex11', label: 'class & style 바인딩', icon: '🎨' },
-  { key: 'Ex12', label: 'watchEffect 자동 반응', icon: '⚡' },
-  { key: 'Ex13', label: '카운터 & 토글',        icon: '🔢' },
-  { key: 'Ex14', label: 'v-model 간단폼',       icon: '📝' },
-  { key: 'Ex15', label: '로컬 목록 필터',       icon: '🔍' },
-  { key: 'Ex16', label: '탭 전환',              icon: '🗂️' },
-  { key: 'Ex17', label: '키보드, 마우스 이벤트', icon: '🎊' },
-  { key: 'Ex18', label: '폼/파일/휠 데모',       icon: '🖱️' },
+  // Ex 시리즈
+  { key:'Ex1',  label:'bind_바인드',      icon:'📎' },
+  { key:'Ex2',  label:'if_이프',          icon:'❓' },
+  { key:'Ex3',  label:'show_쇼우',        icon:'👁️‍🗨️' },
+  { key:'Ex4',  label:'for_포',           icon:'🔃' },
+  { key:'Ex5',  label:'양방향_bind',      icon:'🖇️' },
+  { key:'Ex6',  label:'v-if',             icon:'🧩' },
+  { key:'Ex7',  label:'v-for',            icon:'📋' },
+  { key:'Ex8',  label:'watch',            icon:'⏱️' },
+  { key:'Ex9',  label:'computed',         icon:'🖥️' },
+  { key:'Ex10', label:'이벤트',           icon:'🖱️' },
+  { key:'Ex11', label:'class/style',      icon:'🎨' },
+  { key:'Ex12', label:'watchEffect',      icon:'⚡' },
+  { key:'Ex13', label:'카운터',           icon:'🔢' },
+  { key:'Ex14', label:'v-model',          icon:'📝' },
+  { key:'Ex15', label:'필터',             icon:'🔍' },
+  { key:'Ex16', label:'탭',               icon:'🗂️' },
+  { key:'Ex17', label:'키/마우스',        icon:'🎊' },
+  { key:'Ex18', label:'폼/파일',          icon:'🖱️' },
+  { key:'Ex19', label:'웹/라우터',        icon:'📚' },
+  { key:'Ex20', label:'기타',             icon:'🧰' },
+
+  // 08/28~29
+  { key:'HomeView',     label:'홈 화면',          icon:'🏠' },
+  { key:'AboutView',    label:'어바웃 화면',      icon:'ℹ️' },
+  { key:'StudyView',    label:'스터디 화면',      icon:'📖' },
+  { key:'Ex_WebDesign', label:'웹디자인 루트',    icon:'🧭' },
+  { key:'Ex_A1',        label:'suit 쇼핑몰',      icon:'🛍️' },
+  { key:'Ex_B2',        label:'한국 김치 이야기', icon:'🥬' },
+  { key:'HomeIntro',    label:'Home 소개',        icon:'📄' },
+  { key:'AboutIntro',   label:'About 소개',       icon:'📄' },
+  { key:'QuickMemo',    label:'Quick Memo',       icon:'📝' },
+  { key:'RouterHelper', label:'Router Helper',    icon:'🧭' },
 ]
 
-// pages 객체의 첫 키를 얻어 초기 선택에 사용
-function firstKeyOf(pages) {
-  const keys = pages ? Object.keys(pages) : []
-  return keys.length ? keys[0] : null
+const firstKeyOf = (pages) => {
+  const ks = pages ? Object.keys(pages) : []
+  return ks.length ? ks[0] : null
 }
 
-// 현재 날짜 pages에 실제 존재하는 키만 버튼으로 노출
-const visibleMenus = computed(() => {
-  if (!currentPages.value) return []
-  return allMenus.filter(m => currentPages.value[m.key])
-})
+const visibleMenus = computed(() =>
+  currentPages.value
+    ? allMenus.filter((m) => currentPages.value[m.key])
+    : [],
+)
 
-/* 화면 전환 */
 const openDay = (day) => {
   selectedDay.value = day
-  activeComp.value = firstKeyOf(day.pages) || null // 날짜별 첫 컴포넌트 자동 선택
+  activeComp.value  = firstKeyOf(day.pages)
   step.value = 'menu'
 }
+
 const backToDay = () => {
   step.value = 'day'
   selectedDay.value = null
 }
 
-/* 안전 가드: 렌더 가능한지 확인 */
-const canRenderActive = computed(() => {
-  return !!(currentPages.value && currentPages.value[activeComp.value])
-})
+const canRenderActive = computed(() =>
+  !!(currentPages.value && currentPages.value[activeComp.value]),
+)
 
-/* 선택 유효성 자동 보정(세트 변경/초기 진입 등) */
+/* 선택 유효성 자동 보정 */
 watch([currentPages, activeComp], ([pages, key]) => {
-  if (!pages) {
-    activeComp.value = null
-    return
-  }
-  if (!key || !pages[key]) {
-    activeComp.value = firstKeyOf(pages)
-  }
+  if (!pages || !pages[key]) activeComp.value = firstKeyOf(pages || {})
 })
 </script>
+
+
 
 <template>
   <div class="stage">

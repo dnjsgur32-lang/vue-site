@@ -87,9 +87,9 @@ const onInput = (e) => {
 
 const onCtrlSAlert = () => { alert("'Ctrl' + 'S' 키를 동시에 눌렀습니다.") }
 
-import tiger from '../assets/img_tiger_square.jpeg'
-import moose from '../assets/img_moose_square.jpeg'
-import kangaroo from '../assets/img_kangaroo_square.jpeg'
+import tiger from '@/assets/img_tiger_square.jpeg'
+import moose from '@/assets/img_moose_square.jpeg'
+import kangaroo from '@/assets/img_kangaroo_square.jpeg'
 const images = [tiger, moose, kangaroo]
 const imgIndex = ref(0)
 const currentImage = computed(() => images[imgIndex.value])

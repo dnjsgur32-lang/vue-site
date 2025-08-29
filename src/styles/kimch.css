@@ -1,0 +1,10 @@
+:root{
+  --bg:#fff; --text:#333; --muted:#666; --line:#e5e7eb;
+  --brand:#a61e1e; --brand-weak:#fbeaea;
+}
+*{box-sizing:border-box}
+html,body,#app{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans KR',sans-serif}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}

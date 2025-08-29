@@ -1,0 +1,189 @@
+/* ===========================
+   JUST SHOP – Global Styles (clean)
+   =========================== */
+
+/* ---------- Design Tokens ---------- */
+:root{
+  --maxw: 1200px;
+
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --c-bg: #ffffff;
+  --c-body: #f6f6f6;
+  --c-text: #222;
+  --c-muted: #666;
+  --c-line: #eaeaea;
+  --c-card: #fafafa;
+
+  --c-primary: #111;     /* 다크 네비 색 */
+  --c-accent: #bfa15a;   /* 골드 포인트 */
+
+  --shadow: 0 8px 24px rgba(0,0,0,.06);
+  --radius: 12px;
+}
+
+/* ---------- Reset ---------- */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family: Arial, sans-serif;color:var(--c-text);background:var(--c-body)}
+ul{list-style:none}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ---------- Layout ---------- */
+.project1-wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--space-4)}
+.section{margin-top:var(--space-8)}
+
+/* =====================================
+   A: Header (100px)
+   ===================================== */
+header{
+  height:100px;                     /* 고정 */
+  background:var(--c-bg);
+  border-bottom:1px solid var(--c-line);
+  display:flex;align-items:center;
+  position:relative; z-index:60;    /* 메뉴가 슬라이더 위로 */
+  overflow:visible;
+}
+.header-wrap{
+  width:100%;
+  max-width:var(--maxw);
+  margin:0 auto;
+  display:flex;align-items:center;justify-content:flex-start;
+  gap:48px;                         /* 로고–메뉴 간격 */
+  padding:0 var(--space-4);
+}
+.logo{display:flex;align-items:center;gap:var(--space-3)}
+.logo img{height:42px}
+
+/* Main menu */
+.main-menu{position:relative; z-index:61}
+.main-menu .depth1{display:flex;gap:32px}   /* 메뉴 간격 넓힘 */
+.depth1 > li{position:relative}
+.depth1 > li > a{
+  display:block;padding:12px 14px;border-radius:8px;
+  font-weight:600;color:var(--c-text);transition:all .2s ease;
+}
+.depth1 > li > a:hover{
+  color:var(--c-accent);
+  background:rgba(191,161,90,.10);
+}
+.depth2{
+  position:absolute;top:100%;left:0; z-index:999;  /* 드롭다운 최상위 */
+  min-width:180px;background:#fff;border:1px solid var(--c-line);
+  border-radius:10px;padding:6px 8px;box-shadow:var(--shadow);display:none;
+}
+.depth2 li a{padding:10px;border-radius:8px;color:var(--c-muted)}
+.depth2 li a:hover{background:#f7f7f7;color:var(--c-text)}
+.main-menu li:hover .depth2{display:block}
+
+/* =====================================
+   B: Slider (300px)
+   ===================================== */
+.slider-container{
+  position:relative; z-index:1;     /* 헤더보다 뒤 */
+  height:300px;                     /* 고정 */
+  border-radius:var(--radius);
+  overflow:hidden;margin-top:16px;background:#ddd;
+}
+.slider{display:flex;height:100%;transition:transform .6s ease}
+.slide{min-width:100%;height:100%;background-size:cover;background-position:center}
+
+.slider-dots{
+  position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
+  display:flex;gap:10px
+}
+.dot{width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.08)}
+.dot.active{background:#fff}
+
+/* 슬라이드 텍스트 박스(선택) */
+.slider-text{
+  position:absolute; left:24px; bottom:24px;
+  background:rgba(0,0,0,.5); color:#fff;
+  padding:12px 16px; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,.18);
+}
+.slider-text h2{font-size:22px; color:var(--c-accent); margin-bottom:6px}
+.slider-text p{font-size:14px}
+
+/* =====================================
+   C: Contents (200px, 3열)
+   ===================================== */
+.contents{
+  height:200px;                     /* 고정 */
+  display:grid;
+  grid-template-columns: 1.2fr 1fr 1fr;  /* C1/C2, C3, C4 */
+  gap:16px; margin:16px 0;
+}
+.card{
+  background:#fff;border:1px solid #eaeaea;border-radius:12px;
+  padding:16px; box-shadow:var(--shadow);
+}
+.card h2{font-size:16px;font-weight:700;margin-bottom:10px}
+
+/* C1/C2 탭 */
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tab-btn{
+  padding:8px 12px;border:1px solid #eaeaea;border-radius:8px;
+  background:#fafafa;font-size:13px;cursor:pointer
+}
+.tab-btn.active{background:#111;color:#fff;border-color:#111}
+
+.notice-list{height:126px;overflow:auto;padding-right:4px}
+.notice-list li{margin-bottom:6px;font-size:14px}
+.notice-list a{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* 갤러리(탭 내용) */
+.gallery-grid{height:126px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+
+/* C3/C4 이미지 카드 */
+.banner-img, .shortcut-img{
+  width:100%; height:126px; object-fit:cover; border-radius:10px
+}
+
+/* =====================================
+   Buttons (공용)
+   ===================================== */
+button{
+  cursor:pointer;font-size:14px;border:none;padding:10px 16px;border-radius:8px;
+  background:var(--c-accent); color:#fff; transition:background .2s ease, transform .1s ease;
+}
+button:hover{background:#a58d4a}
+button:active{transform:translateY(1px)}
+.close-popup{background:var(--c-accent)!important;color:#fff!important}
+.close-popup:hover{background:#a58d4a!important}
+
+/* =====================================
+   D: Footer (100px)
+   ===================================== */
+footer{
+  height:100px; background:#111;color:#fff; display:flex; align-items:center;
+}
+.footer-wrap{
+  width:100%; max-width:var(--maxw); margin:0 auto;
+  display:grid; grid-template-columns: 160px 1fr 200px;
+  align-items:center; gap:16px; padding:0 16px;
+}
+.footer-logo img{height:40px;filter:grayscale(100%)}
+.footer-copy{font-size:13px;color:#bbb;text-align:center}
+.footer-sns{display:flex;justify-content:flex-end;gap:12px}
+.footer-sns a{opacity:.75;transition:opacity .2s}
+.footer-sns a:hover{opacity:1}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px){
+  .slider-container{height:280px}
+  .contents{grid-template-columns:repeat(2,1fr); height:auto}
+  .card{min-height:200px}
+}
+@media (max-width: 640px){
+  .header-wrap{height:auto;flex-direction:column;gap:var(--space-3);padding:var(--space-3)}
+  .main-menu .depth1{gap:16px}
+  .slider-container{height:240px}
+  .contents{grid-template-columns:1fr; height:auto}
+}

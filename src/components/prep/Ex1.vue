@@ -1,5 +1,5 @@
 <script setup>
-import img_beach3 from '../assets/img_beach3.jpg'
+import img_beach3 from '@/assets/img_beach3.jpg'
 import { ref } from 'vue';
 
 

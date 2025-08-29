@@ -1,0 +1,90 @@
+:root {
+  /* 시스템 폰트 + 토큰 */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* ===== 색 토큰 (배경만 변경) ===== */
+  --bg: #f5f6fa;          /* ← 더 밝은 연그레이로 톤 다운 */
+  --text: #333;
+  --muted: #666;
+  --line: #e5e7eb;
+  --brand: #a61e1e;
+  --brand-weak: #fbeaea;
+
+  color: var(--text);
+  background-color: var(--bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 링크 기본 */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ✅ Vite 기본 중앙정렬/배경을 전역으로 무력화 */
+html,
+body {
+  min-height: 100%;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+}
+body {
+  margin: 0;
+  display: block;  /* Vite 템플릿의 flex 제거 */
+}
+
+/* 전역 컨테이너 */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* 버튼 기본 */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.0em;
+  font-size: 1rem;
+  background: #f3f4f6;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+button:hover {
+  background: #e5e7eb;
+}
+
+/* 카드 유틸 */
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* 앱 루트 – 중앙정렬 제거 */
+#app {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* 필요하면 다크 모드 정의(지금은 비워둠) */
+@media (prefers-color-scheme: dark) {}
+
+/* 라우터 active 표시(전역) */
+a.router-link-active {
+  color: var(--brand);
+  text-decoration: underline;
+}
+/* 네비 내부는 App.vue의 .nav-link.active가 우선 */

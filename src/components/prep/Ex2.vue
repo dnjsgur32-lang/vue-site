@@ -15,7 +15,7 @@
     <hr>
     <div v-if="Text2.includes('pizza2')">
         <p>pizza</p>
-        <img src="../assets/img_pizza.svg" alt="피자이미지">
+        <img src="@/assets/img_pizza.svg" alt="피자이미지">
     </div>
     <p v-else>피자 없음</p>
 </template>
